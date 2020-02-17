@@ -4,8 +4,8 @@
       <div v-for="(cell,index) in dataLists"
         class="flexItem"
         @click="cellSelect(index)"
-        :class="{cellCheck: cell.isactive}" :key="index"
-      >{{`index:${index} val:${cell.isactive}`}}</div>
+        :class="{cellCheck: cell.isActive}" :key="index"
+      >{{`index:${index} val:${cell.isActive}`}}</div>
     </div>
     <p>{{dataLists}}</p>
   </div>
@@ -26,17 +26,22 @@ export default {
   },
   created() {
     // this.dataLists = this.dataLists.fill(null).map((_,i) => i+1).map(month => month + '月');
-    // TODO: 配列が参照渡しになっているので個別にオブジェクトを生成
-    this.dataLists = this.dataLists.fill({ isactive: false, task: "none" });
+    // TODO: for文ダサいので、forerchかもっと良きメソッド使う。
+    // this.dataLists = this.dataLists.fill({ isactive: false, task: "none" });
+    for(let i=0; i<this.dataLists.length; i++){
+        this.$set(this.dataLists,i,{isActive: false,task: 'none'})
+    }
   },
   methods: {
     cellSelect(index) {
-      if (this.dataLists[index].isactive === false) {
-          this.dataLists[index].isactive = true;
+        console.log(index)
+        console.log(this.dataLists[index])
+      if (this.dataLists[index].isActive === false) {
+          this.dataLists[index].isActive = true;
           this.dataLists[index].task = 'work';
       } else {
         this.dataLists.splice(index, 1);
-        this.dataLists.push({ isactive: false, task: 'none' });
+        this.dataLists.push({ isActive: false, task: 'newNone' });
       }
     }
   }
