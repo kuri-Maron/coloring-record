@@ -1,10 +1,12 @@
 <template>
   <div>
     <div class="flexBox">
-      <div v-for="(cell,index) in dataLists"
+      <div
+        v-for="(cell,index) in dataLists"
         class="flexItem"
         @click="cellSelect(index)"
-        :class="{cellCheck: cell.isActive}" :key="index"
+        :class="{cellCheck: cell.isActive}"
+        :key="index"
       >{{`index:${index} val:${cell.isActive}`}}</div>
     </div>
     <p>{{dataLists}}</p>
@@ -34,15 +36,16 @@ export default {
   },
   methods: {
     cellSelect(index) {
-        console.log(index)
-        console.log(this.dataLists[index])
-      if (this.dataLists[index].isActive === false) {
+      if (this.dataLists[index].isActive === true) {
+          this.dataLists.splice(index, 1);
+        this.dataLists.push({ isActive: false, task: 'none' });
+        // TODO: 今後は先のセルをクリックした場合、そこまで一気に色ぬり。
+      } else if(index === 0 || this.dataLists[index-1].isActive === true) {
           this.dataLists[index].isActive = true;
           this.dataLists[index].task = 'work';
-      } else {
-        this.dataLists.splice(index, 1);
-        this.dataLists.push({ isActive: false, task: 'newNone' });
-      }
+        // this.dataLists.splice(index, 1);
+        // this.dataLists.push({ isActive: false, task: 'newNone' });
+        }
     }
   }
 };
