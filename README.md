@@ -22,3 +22,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### やりたいこと
+- コンポーネント間通信したい
+    - $set,busをとりあえず使ってみる。（小さくコンパクトにシンプルに初めてみる！
